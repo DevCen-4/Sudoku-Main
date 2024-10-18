@@ -207,7 +207,8 @@ def SolutionSudoku():
     if (solveSudoku(aa, 0, 0)):
         pass
     else:
-        print("no solution  exists ")
+        pass
+        #print("no solution  exists ")
 
     # Giải Sudoku theo từng bước giải
     for count in range(0, 100):
@@ -507,6 +508,15 @@ def check_full():
                 return False
     #Khi nào full thì không cho xóa nữa
     return True
+# hàm check sai để dẫn tới thua
+def check_lose():
+    cnt = 0
+    for row in range(0, 9):
+        for col in range(0, 9):
+            if control_grid[row][col] == -4:
+                cnt += 1
+    return cnt >= 3
+
 
 def solveSudoku(row, col):
     global grid

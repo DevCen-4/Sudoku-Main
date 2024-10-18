@@ -13,6 +13,7 @@ from new import grid
 from new import SolutionSudoku
 from new import FindHint
 from new import check_full
+from new import check_lose
 
 # Tạo pygame
 pygame.init()
@@ -54,6 +55,9 @@ def desktop():
         if check_full():
             #Viết hàm thông báo ở đây nhé bồ !!
             print("You Win!")
+        if check_lose():
+            print("You Lose!")
+
         for event in pygame.event.get():
             # Sự kiện thoát game
             if event.type == pygame.QUIT:
@@ -103,7 +107,8 @@ def desktop():
                                         print(grid[i][j], end=' ')
                                     print()
                             else:
-                                print("no solution exists ")
+                                pass
+                                #print("no solution exists ")
                         if button_clicked == "hint":
                             tmp = FindHint()
 
