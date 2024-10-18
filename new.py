@@ -505,6 +505,7 @@ def check_full():
         for col in range(0, 9):
             if grid[row][col] == 0:
                 return False
+    #Khi nào full thì không cho xóa nữa
     return True
 
 def solveSudoku(row, col):

@@ -12,6 +12,7 @@ from new import solveSudoku
 from new import grid
 from new import SolutionSudoku
 from new import FindHint
+from new import check_full
 
 # Tạo pygame
 pygame.init()
@@ -33,7 +34,7 @@ def draw_grid():
         if i % 3 == 0:
             pygame.draw.line(window, (52, 72, 97), (28, (i * 100) + 30), (932, (i * 100 + 30)), 5)
             pygame.draw.line(window, (52, 72, 97), (100 * i + 30, 28), ((i * 100 + 30), 930), 5)
-
+#
 # Biến chạy game
 running = True
 
@@ -49,15 +50,15 @@ def desktop():
         draw_number_and_new_game_button(window)
         draw_numbers(window)
         SolutionSudoku()
-
-
-
+        # Kiểm tra xem đã điền hết chưa, và thực hiện thông báo
+        if check_full():
+            #Viết hàm thông báo ở đây nhé bồ !!
+            print("You Win!")
         for event in pygame.event.get():
             # Sự kiện thoát game
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-
             # Sự kiện chuột
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse = pygame.mouse.get_pos()
@@ -88,8 +89,13 @@ def desktop():
                     if button_clicked:
                         print(f"Đã bấm nút: {button_clicked}")
                         if button_clicked == "delete":
-                            delete_on(row, col)  # Gọi hàm để xóa giá trị
-                            print(f"Đã xóa giá trị tại ô ({row}, {col})")
+                            bool = check_full()
+                            if not bool:
+                                delete_on(row,col)
+                                print(f"Đã xóa giá trị tại ô ({row}, {col})")
+                            else:
+                                # Thông báo người chơi chiến thắng
+                                print("You Win !")
                         if button_clicked == "answer":
                             if solveSudoku(0, 0):
                                 for i in range(0, 9):
